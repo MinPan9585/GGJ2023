@@ -6,17 +6,17 @@ public class palyercontrol1 : MonoBehaviour
 {
     public float movespeed;
     public float jumpforce;
+    public GameObject pos;
 
     private Rigidbody2D rb;
     private bool facingright = true;
     private float movedirection;
     private bool isjumping = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
     
     
     void Update()
