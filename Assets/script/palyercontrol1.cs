@@ -9,11 +9,16 @@ public class palyercontrol1 : MonoBehaviour
     public GameObject pos;
     public GameObject shotpoint;
     public GameObject bullet123;
+    public Transform Celcheck;
+    public Transform grdcheck;
+    public LayerMask groundobjects;
+    public float checkRad;
 
     private Rigidbody2D rb;
     private bool facingright = true;
     private float movedirection;
     private bool isjumping = false;
+    private bool isGrounded;
 
     void Start()
     {
@@ -35,14 +40,15 @@ public class palyercontrol1 : MonoBehaviour
 
     }
     private void FixedUpdate() {
-
+        isGrounded = Physics2D.OverlapCircle(grdcheck.position, checkRad, groundobjects);
         move();
+
         
     }
     private void move()
     {
         rb.velocity = new Vector2(movedirection * movespeed, rb.velocity.y);
-        if (isjumping==true)
+        if (isjumping==true&& isGrounded)
         {
             rb.AddForce(new Vector2(0f, jumpforce));
 
