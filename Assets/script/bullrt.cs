@@ -15,7 +15,7 @@ public class bullrt : MonoBehaviour
     
     void Update()
     {
-        transform.Translate(new Vector3(0, 0, m_speed));
+        transform.Translate(new Vector3(m_speed, 0, 0));
         
     }
 }

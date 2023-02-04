@@ -31,13 +31,13 @@ public class palyercontrol1 : MonoBehaviour
     {
         Inputdeal();
         Animation();
-        
+        shooting();
 
     }
     private void FixedUpdate() {
 
         move();
-        shooting();
+        
     }
     private void move()
     {
