@@ -756,6 +756,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   checkRad: 0.3
+  health: 1
+  healthSlider: {fileID: 1873239896}
 --- !u!1 &698011637
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class palyercontrol1 : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class palyercontrol1 : MonoBehaviour
     private float movedirection;
     private bool isjumping = false;
     private bool isGrounded;
+
+    public float health = 1f;
+    public Slider healthSlider;
+    public Vector3 originalPosition;
 
     void Start()
     {
@@ -83,5 +88,18 @@ public class palyercontrol1 : MonoBehaviour
        
     }
 
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet2"))
+        {
+            health -= 0.2f;
+            Destroy(collision.gameObject);
+            healthSlider.value = 1 - health;
+            if(Mathf.Abs(health - 0)<=0.05f)
+            {
+                transform.position = originalPosition;
+                health = 1f;
+            }
+        }
+    }
 }
