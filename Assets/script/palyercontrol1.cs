@@ -7,6 +7,8 @@ public class palyercontrol1 : MonoBehaviour
     public float movespeed;
     public float jumpforce;
     public GameObject pos;
+    public GameObject shotpoint;
+    public GameObject bullet123;
 
     private Rigidbody2D rb;
     private bool facingright = true;
@@ -17,8 +19,14 @@ public class palyercontrol1 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    
-    
+
+    private void shooting(){
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Instantiate(bullet123, shotpoint.transform.position, shotpoint.transform.rotation);
+        }
+
+    }
     void Update()
     {
         Inputdeal();
@@ -29,6 +37,7 @@ public class palyercontrol1 : MonoBehaviour
     private void FixedUpdate() {
 
         move();
+        shooting();
     }
     private void move()
     {

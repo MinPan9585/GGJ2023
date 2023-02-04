@@ -45,7 +45,7 @@ public class palyercontrol2 : MonoBehaviour
         movedirection = Input.GetAxis("Horizontal2");
 
         
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump2"))
         {
             isjumping = true;
         }
