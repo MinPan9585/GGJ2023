@@ -91,30 +91,27 @@ public class palyercontrol1 : MonoBehaviour
        
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D aaa)
     {
-        if (collision.gameObject.CompareTag("Bullet2"))
+        if (aaa.gameObject.CompareTag("Bullet2"))
         {
             health -= 0.2f;
-            Destroy(collision.gameObject);
+            Destroy(aaa.gameObject);
             healthSlider.value = 1 - health;
             if(Mathf.Abs(health - 0)<=0.05f)
             {
                 transform.position = originalPosition;
                 health = 1f;
             }
+            
         }
-        
-    }
-    private void OOnTriggerEnter2D(Collider2D other)
-    {
-
-        if (other.gameObject.CompareTag("scorezone"))
+        else if (aaa.gameObject.CompareTag("scorezone"))
         {
             score++;
-            Uscore.text = "Redscore"+score.ToString();
-            
+            Uscore.text = "Redscore" + score.ToString();
+            //UnityEngine.Debug.Log("s");
 
         }
+
     }
 }
