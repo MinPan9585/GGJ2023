@@ -5,17 +5,23 @@ using UnityEngine.UI;
 
 public class daojishi : MonoBehaviour
 {
-    public float timestart;
+    public float gameTime;
     public Text daojishiadad;
-    void Start()
+
+    private void Start()
     {
-        daojishiadad.text = "Left time:"+timestart.ToString();
+        StartCoroutine("Daojishi");
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator Daojishi()
     {
-        timestart -= Time.deltaTime;
-        daojishiadad.text = "Left time:" + timestart.ToString();
+        while (gameTime > 0)
+        {
+            yield return new WaitForSeconds(1);
+            gameTime--;
+            daojishiadad.text = "Left time:" + gameTime.ToString();
+            
+
+        } 
     }
 }

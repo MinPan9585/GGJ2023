@@ -10,6 +10,7 @@ public class Pickup : MonoBehaviour
     public Transform pos2;
     private bool picked = false;
     private bool isPlayer1;
+    public AudioClip pick;
 
     private void Update()
     {
@@ -25,25 +26,29 @@ public class Pickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
-        if (other.gameObject.CompareTag("Player1"))
+        if(picked == false)
         {
-            if(other.gameObject.GetComponent<palyercontrol1>().hasPickup == false)
+            if (other.gameObject.CompareTag("Player1"))
             {
-                isPlayer1 = true;
-                picked = true;
-                this.transform.parent = player1;
-                other.gameObject.GetComponent<palyercontrol1>().hasPickup = true;
+                if (other.gameObject.GetComponent<palyercontrol1>().hasPickup == false)
+                {
+                    player1.GetComponent<palyercontrol1>().audios.PlayOneShot(pick);
+                    isPlayer1 = true;
+                    picked = true;
+                    this.transform.parent = player1;
+                    other.gameObject.GetComponent<palyercontrol1>().hasPickup = true;
+                }
             }
-        }
-        if (other.gameObject.CompareTag("Player2"))
-        {
-            if (other.gameObject.GetComponent<palyercontrol2>().hasPickup == false)
+            if (other.gameObject.CompareTag("Player2"))
             {
-                isPlayer1 = false;
-                picked = true;
-                this.transform.parent = player2;
-                other.gameObject.GetComponent<palyercontrol2>().hasPickup = true;
+                if (other.gameObject.GetComponent<palyercontrol2>().hasPickup == false)
+                {
+                    player2.GetComponent<palyercontrol2>().audios.PlayOneShot(pick);
+                    isPlayer1 = false;
+                    picked = true;
+                    this.transform.parent = player2;
+                    other.gameObject.GetComponent<palyercontrol2>().hasPickup = true;
+                }
             }
         }
     }

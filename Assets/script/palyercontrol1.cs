@@ -30,6 +30,13 @@ public class palyercontrol1 : MonoBehaviour
 
     public bool hasPickup = false;
 
+    public AudioSource audios;
+    public AudioClip hurt;
+    
+    public AudioClip jump;
+    public AudioClip shoot;
+    public AudioClip getScore;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,6 +46,7 @@ public class palyercontrol1 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             Instantiate(bullet123, shotpoint.transform.position, shotpoint.transform.rotation);
+            audios.PlayOneShot(shoot);
         }
 
     }
@@ -61,7 +69,7 @@ public class palyercontrol1 : MonoBehaviour
         if (isjumping==true&& isGrounded)
         {
             rb.AddForce(new Vector2(0f, jumpforce));
-
+            audios.PlayOneShot(jump);
         }
         isjumping = false;
 
@@ -100,7 +108,8 @@ public class palyercontrol1 : MonoBehaviour
             health -= 0.2f;
             Destroy(aaa.gameObject);
             healthSlider.value = 1 - health;
-            if(Mathf.Abs(health - 0)<=0.05f)
+            audios.PlayOneShot(hurt);
+            if (Mathf.Abs(health - 0)<=0.05f)
             {
                 transform.position = originalPosition;
                 health = 1f;
@@ -114,6 +123,7 @@ public class palyercontrol1 : MonoBehaviour
             {
                 score++;
                 Uscore.text = "Redscore" + score.ToString();
+                audios.PlayOneShot(getScore);
 
                 //UnityEngine.Debug.Log("s");
                 Destroy(this.transform.GetChild(6).gameObject);
