@@ -28,6 +28,8 @@ public class palyercontrol1 : MonoBehaviour
     public Slider healthSlider;
     public Vector3 originalPosition;
 
+    public bool hasPickup = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -102,16 +104,21 @@ public class palyercontrol1 : MonoBehaviour
             {
                 transform.position = originalPosition;
                 health = 1f;
+                healthSlider.value = 1 - health;
             }
             
         }
         else if (aaa.gameObject.CompareTag("scorezone"))
         {
-            score++;
-            Uscore.text = "Redscore" + score.ToString();
-            //UnityEngine.Debug.Log("s");
+            if(hasPickup == true)
+            {
+                score++;
+                Uscore.text = "Redscore" + score.ToString();
 
+                //UnityEngine.Debug.Log("s");
+                Destroy(this.transform.GetChild(6).gameObject);
+                hasPickup = false;
+            }
         }
-
     }
 }

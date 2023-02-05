@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class palyercontrol2 : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class palyercontrol2 : MonoBehaviour
     public float checkRad;
     public GameObject shotpoint;
     public GameObject bullet123;
+    public int score;
+    public Text Uscore;
 
     private Rigidbody2D rb;
     private bool facingright = true;
@@ -20,13 +23,19 @@ public class palyercontrol2 : MonoBehaviour
     private bool isjumping = false;
     private bool isGrounded;
 
+    public float health = 1f;
+    public Slider healthSlider;
+    public Vector3 originalPosition;
+
+    public bool hasPickup = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
     private void shooting()
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetButtonDown("Fire3"))
         {
             Instantiate(bullet123, shotpoint.transform.position, shotpoint.transform.rotation);
         }
@@ -84,5 +93,33 @@ public class palyercontrol2 : MonoBehaviour
        
     }
 
+    private void OnTriggerEnter2D(Collider2D aaa)
+    {
+        if (aaa.gameObject.CompareTag("Bullet2"))
+        {
+            health -= 0.2f;
+            Destroy(aaa.gameObject);
+            healthSlider.value = 1 - health;
+            if (Mathf.Abs(health - 0) <= 0.05f)
+            {
+                transform.position = originalPosition;
+                health = 1f;
+                healthSlider.value = 1 - health;
+            }
 
+        }
+        else if (aaa.gameObject.CompareTag("scorezone"))
+        {
+            if (hasPickup == true)
+            {
+                score++;
+                Uscore.text = "Bluescore" + score.ToString();
+
+                //UnityEngine.Debug.Log("s");
+                Destroy(this.transform.GetChild(6).gameObject);
+                hasPickup = false;
+            }
+        }
+
+    }
 }
