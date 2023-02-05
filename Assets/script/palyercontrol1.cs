@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ public class palyercontrol1 : MonoBehaviour
     public Transform grdcheck;
     public LayerMask groundobjects;
     public float checkRad;
+    public int score;
+    public Text Uscore;
 
     private Rigidbody2D rb;
     private bool facingright = true;
@@ -100,6 +103,18 @@ public class palyercontrol1 : MonoBehaviour
                 transform.position = originalPosition;
                 health = 1f;
             }
+        }
+        
+    }
+    private void OOnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.gameObject.CompareTag("scorezone"))
+        {
+            score++;
+            Uscore.text = "Redscore"+score.ToString();
+            
+
         }
     }
 }
